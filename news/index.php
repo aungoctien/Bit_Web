@@ -406,9 +406,9 @@
 
 
 
-
-
-												while ($row1 = mysqli_fetch_array($noi_dung1)) {
+												$i=0;
+												
+												while ($row1 = mysqli_fetch_array($noi_dung1) and $i<3) { $i++;
 
 												?>
 
@@ -500,52 +500,128 @@
 
 								<h3 class="f1-m-2 cl3 tab01-title">
 
-									Tiêu điểm
+									Tin nóng
 
 								</h3>
 
 							</div>
 
 
-
+<!-- hot news -->
 
 
 							<ul class="p-t-35">
 
 								<?php
-
-								$query = "SELECT * FROM tbl_tin_tuc ";
-
-								$noi_dung = mysqli_query($ket_noi, $query);
-
-								while ($row = mysqli_fetch_array($noi_dung)) {
+								
 
 
+
+								$sql_hot_news = "SELECT 
+		
+									tbl_comment.id_tin_tuc,
+		
+									tieu_de,
+		
+									ngay,
+		
+									ten_loai_tin_tuc,
+		
+									anh,
+		
+									COUNT(tbl_comment.id_tin_tuc)
+		
+								FROM
+		
+									tbl_loai_tin_tuc
+		
+								JOIN tbl_tin_tuc ON tbl_loai_tin_tuc.id_loai_tin_tuc = tbl_tin_tuc.id_loai_tin_tuc
+		
+								JOIN tbl_comment ON tbl_tin_tuc.id_tin_tuc = tbl_comment.id_tin_tuc
+		
+								GROUP BY
+		
+									id_tin_tuc,
+		
+									tieu_de,
+		
+									ngay,
+		
+									ten_loai_tin_tuc,
+		
+									anh 
+		
+								ORDER BY COUNT(tbl_comment.id_tin_tuc) DESC;";
+		
+								$noi_dung_hot_news = mysqli_query($ket_noi, $sql_hot_news);
+
+								while ($row_hot_news = mysqli_fetch_array($noi_dung_hot_news)) {
 
 								?>
 
-									<div class="">
+									<li class="flex-wr-sb-s p-b-30">
 
-										<p class="flex-wr-sb-s p-b-22">
+										<a href="./tin_tuc_chi_tiet.php?id=<?php echo $row_hot_news['id_tin_tuc'] ?>" class="size-w-10 wrap-pic-w hov1 trans-03">
+
+											<img src="../img/tin_tuc/<?php echo $row_hot_news['anh'] ?>" alt="IMG">
+
+										</a>
 
 
 
-											<a href="./tin_tuc_chi_tiet.php?id=<?php echo $row['id_tin_tuc'] ?>" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
+										<div class="size-w-11">
 
-												<?php echo $row['tieu_de'] ?>
+											<h6 class="p-b-4">
 
-											</a>
+												<a href="./tin_tuc_chi_tiet.php?id=<?php echo $row_hot_news['id_tin_tuc'] ?>" class="f1-s-5 cl3 hov-cl10 trans-03">
 
-										</p>
+													<?php echo $row_hot_news['tieu_de'] ?>
 
-									</div>
+												</a>
+
+											</h6>
+
+
+
+											<span class="cl8 txt-center p-b-24">
+
+
+
+												<?php echo $row_hot_news['ten_loai_tin_tuc'] ?>
+
+
+
+
+
+												<span class="f1-s-3 m-rl-3">
+
+													-
+
+												</span>
+
+
+
+
+
+												<span class="f1-s-3">
+
+													<?php echo $row_hot_news['COUNT(tbl_comment.id_tin_tuc)'] ?> bình luận
+
+												</span>
+
+											</span>
+
+										</div>
+
+									</li>
+
+
 
 								<?php } ?>
 
 							</ul>
 
-
-
+<!-- end hot new		 -->
 						</div>
 
 					</div>

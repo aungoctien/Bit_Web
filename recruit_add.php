@@ -144,7 +144,29 @@ $db_name="bit_db";
     }
 
                             
+    echo 
 
+    "
+
+        <script type='text/javascript'>
+
+            window.alert('Bạn đã phản hồi thành công.');
+
+        </script>
+
+    ";
+
+    echo 
+
+    "
+
+        <script type='text/javascript'>
+
+            window.location.href = './index.php'
+
+        </script>
+
+    ";
         
 
 							

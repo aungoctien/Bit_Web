@@ -156,11 +156,28 @@
 
 
 
-					<li>
 
-						<a href="tin_sinh_vien.php">Tin sinh viên</a>
+					<?php
 
-					</li>
+					$query1 = "SELECT * FROM tbl_loai_tin_tuc";
+
+					$noi_dung1 = mysqli_query($ket_noi, $query1);
+
+					while ($row1 = mysqli_fetch_array($noi_dung1)) {
+
+					?>
+
+						<li class="mega-menu-item">
+
+							<a href="./tin_tuc_chu_de.php?id=<?php echo $row1['id_loai_tin_tuc'] ?>"><?php echo $row1['ten_loai_tin_tuc'] ?></a>
+
+						</li>
+
+					<?php
+
+					}
+
+					?>
 
 				</ul>
 
@@ -214,23 +231,27 @@
 
 							</li>
 
+							<?php
 
+							$query1 = "SELECT * FROM tbl_loai_tin_tuc";
 
-							<li class="mega-menu-item">
+							$noi_dung1 = mysqli_query($ket_noi, $query1);
 
-								<a href="./tin_cong_nghe.php">Tin công nghệ</a>
+							while ($row1 = mysqli_fetch_array($noi_dung1)) {
 
+							?>
 
+								<li class="mega-menu-item">
 
-							</li>
+									<a href="./tin_tuc_chu_de.php?id=<?php echo $row1['id_loai_tin_tuc'] ?>"><?php echo $row1['ten_loai_tin_tuc'] ?></a>
 
+								</li>
 
+							<?php
 
-							<li class="mega-menu-item">
+							}
 
-								<a href="tin_sinh_vien.php">Tin sinh viên</a>
-
-							</li>
+							?>
 
 						</ul>
 
@@ -350,19 +371,19 @@
 
 							<form action="./comment_add.php" method="POST">
 
-								<textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="txtcmt" placeholder="Comment..."></textarea>
+								<textarea required class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="txtcmt" placeholder="Comment..."></textarea>
 
 
 
-								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="txtname" placeholder="Name*">
+								<input required class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="txtname" placeholder="Name*">
 
 
 
-								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="txtemail" placeholder="Email*">
+								<input required class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="txtemail" placeholder="Email*">
 
 
 
-								<input type="hidden" name="txtidtintuc" value="<?php echo $row['id_tin_tuc'] ?>">
+								<input  type="hidden" name="txtidtintuc" value="<?php echo $row['id_tin_tuc'] ?>">
 
 								<button class="size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10">
 
